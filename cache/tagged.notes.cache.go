@@ -2,28 +2,26 @@ package cache
 
 import (
 	"sync"
-
-	"github.com/trixky/tt_orness/models"
 )
 
 type taggedNotesCache struct {
 	mtx   sync.Mutex
-	Notes map[string][]models.Note
+	Notes map[string][]string
 }
 
 func (tn *taggedNotesCache) Add(message, tag string) {
 	tn.mtx.Lock()
 
 	if notes, ok := tn.Notes[tag]; ok {
-		tn.Notes[tag] = append(notes, models.Note{Message: message})
+		tn.Notes[tag] = append(notes, message)
 	} else {
-		tn.Notes[tag] = []models.Note{{Message: message}}
+		tn.Notes[tag] = []string{message}
 	}
 
 	tn.mtx.Unlock()
 }
 
-func (tn *taggedNotesCache) Get(tag string) []models.Note {
+func (tn *taggedNotesCache) Get(tag string) []string {
 	tn.mtx.Lock()
 
 	notes := tn.Notes[tag]
@@ -34,4 +32,4 @@ func (tn *taggedNotesCache) Get(tag string) []models.Note {
 
 }
 
-var TaggedNotes = taggedNotesCache{Notes: make(map[string][]models.Note)}
+var TaggedNotes = taggedNotesCache{Notes: make(map[string][]string)}
