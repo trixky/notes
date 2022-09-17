@@ -2,14 +2,15 @@ package services
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/trixky/tt_orness/endpoints"
 )
 
-func StartNoteService() {
+func StartNoteService(port int) {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/notes", endpoints.Notes)
 
-	http.ListenAndServe(":3000", mux)
+	http.ListenAndServe(":"+strconv.Itoa(port), mux)
 }
