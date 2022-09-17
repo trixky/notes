@@ -2,22 +2,24 @@ package cache
 
 import (
 	"sync"
+
+	"github.com/trixky/tt_orness/models"
 )
 
 type untaggedNotesCache struct {
 	mtx   sync.Mutex
-	Notes []string
+	Notes []models.Note
 }
 
-func (un *untaggedNotesCache) Add(message string) {
+func (un *untaggedNotesCache) Add(note models.Note) {
 	un.mtx.Lock()
 
-	un.Notes = append(un.Notes, message)
+	un.Notes = append(un.Notes, note)
 
 	un.mtx.Unlock()
 }
 
-func (un *untaggedNotesCache) Get() []string {
+func (un *untaggedNotesCache) Get() []models.Note {
 	un.mtx.Lock()
 
 	notes := un.Notes
@@ -27,4 +29,4 @@ func (un *untaggedNotesCache) Get() []string {
 	return notes
 }
 
-var UntaggedNotes = untaggedNotesCache{Notes: []string{}}
+var UntaggedNotes = untaggedNotesCache{Notes: []models.Note{}}
