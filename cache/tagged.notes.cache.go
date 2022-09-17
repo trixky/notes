@@ -7,7 +7,7 @@ import (
 )
 
 type taggedNotesCache struct {
-	mtx   sync.Mutex
+	mtx   sync.RWMutex
 	Notes map[string][]models.Note
 }
 
@@ -24,7 +24,7 @@ func (tn *taggedNotesCache) Add(note models.Note) {
 }
 
 func (tn *taggedNotesCache) Get(tag string) []models.Note {
-	tn.mtx.Lock()
+	tn.mtx.RLock()
 
 	notes, ok := tn.Notes[tag]
 
@@ -32,13 +32,13 @@ func (tn *taggedNotesCache) Get(tag string) []models.Note {
 		notes = []models.Note{}
 	}
 
-	tn.mtx.Unlock()
+	tn.mtx.RUnlock()
 
 	return notes
 }
 
 func (tn *taggedNotesCache) GetAll() []models.Note {
-	tn.mtx.Lock()
+	tn.mtx.RLock()
 
 	notes := []models.Note{}
 
@@ -46,7 +46,7 @@ func (tn *taggedNotesCache) GetAll() []models.Note {
 		notes = append(notes, tagged_notes...)
 	}
 
-	tn.mtx.Unlock()
+	tn.mtx.RUnlock()
 
 	return notes
 }

@@ -7,7 +7,7 @@ import (
 )
 
 type untaggedNotesCache struct {
-	mtx   sync.Mutex
+	mtx   sync.RWMutex
 	Notes []models.Note
 }
 
@@ -20,11 +20,11 @@ func (un *untaggedNotesCache) Add(note models.Note) {
 }
 
 func (un *untaggedNotesCache) Get() []models.Note {
-	un.mtx.Lock()
+	un.mtx.RLock()
 
 	notes := un.Notes
 
-	un.mtx.Unlock()
+	un.mtx.RUnlock()
 
 	return notes
 }
