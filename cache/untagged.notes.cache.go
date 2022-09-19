@@ -29,4 +29,15 @@ func (un *untaggedNotesCache) Get() []models.Note {
 	return notes
 }
 
+func (un *untaggedNotesCache) DeleteAll() (number_of_deleted_notes int) {
+	un.mtx.Lock()
+
+	number_of_deleted_notes = len(un.Notes)
+	un.Notes = nil
+
+	un.mtx.Unlock()
+
+	return
+}
+
 var UntaggedNotes = untaggedNotesCache{Notes: []models.Note{}}

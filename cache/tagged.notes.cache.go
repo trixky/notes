@@ -51,4 +51,30 @@ func (tn *taggedNotesCache) GetAll() []models.Note {
 	return notes
 }
 
+func (tn *taggedNotesCache) Delete(tag string) (number_of_deleted_notes int) {
+	tn.mtx.Lock()
+
+	if notes, ok := tn.Notes[tag]; ok {
+		number_of_deleted_notes = len(notes)
+		delete(tn.Notes, tag)
+	}
+
+	tn.mtx.Unlock()
+
+	return
+}
+
+func (tn *taggedNotesCache) DeleteAll() (number_of_deleted_notes int) {
+	tn.mtx.Lock()
+
+	for tag := range tn.Notes {
+		number_of_deleted_notes += len(tn.Notes[tag])
+		delete(tn.Notes, tag)
+	}
+
+	tn.mtx.Unlock()
+
+	return
+}
+
 var TaggedNotes = taggedNotesCache{Notes: make(map[string][]models.Note)}
