@@ -5,12 +5,13 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/trixky/tt_orness/config"
 	"github.com/trixky/tt_orness/services"
 )
 
 const port_env = "NOTE_PORT"
 
-var port = 3000
+var port = config.DEFAULT_PORT
 
 func init() {
 	readed_port := os.Getenv(port_env)
