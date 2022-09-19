@@ -6,6 +6,7 @@ import (
 	"github.com/trixky/tt_orness/handlers"
 )
 
+// Notes handle the "notes" endpoint.
 func Notes(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
@@ -15,6 +16,7 @@ func Notes(w http.ResponseWriter, r *http.Request) {
 	case "DELETE":
 		handlers.DeleteNotesHandler(w, r)
 	default:
+		// If the method is not allowed
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 }
