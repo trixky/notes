@@ -7,6 +7,7 @@ import (
 	"github.com/trixky/tt_orness/endpoints"
 )
 
+// StartNoteService starts the "note" service
 func StartNoteService(port int) {
 	mux := http.NewServeMux()
 
