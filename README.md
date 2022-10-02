@@ -1,12 +1,12 @@
-# Orness technical test
-
-## Project
+# notes
 
 An small API that stores and returns notes from cache. It will work with the JSON representation of the notes.
 
 A note has two fields: message, and an optional tag. Here are two examples:
 ```json
 { “message”: “Buy apples and oranges”, “tag”: “groceries” }
+```
+```json
 { “message”: “Feed the cat”}
 ```
 
