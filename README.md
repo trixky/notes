@@ -8,10 +8,10 @@ A note has two fields: message, and an optional tag. Here are two examples:
 { "message": "Feed the cat"}
 ```
 
-- The tag field is optional
-- The tag may be used to retrieve all notes with this tag
-- A note may not have multiple tags
-- The message field is mandatory and cannot be empty
+- The tag field is optional.
+- The tag may be used to retrieve all notes with this tag.
+- A note may not have multiple tags.
+- The message field is mandatory and cannot be empty.
 
 ## API
 
