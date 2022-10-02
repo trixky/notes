@@ -4,10 +4,8 @@ An small API that stores and returns notes from cache. It will work with the JSO
 
 A note has two fields: message, and an optional tag. Here are two examples:
 ```json
-{ “message”: “Buy apples and oranges”, “tag”: “groceries” }
-```
-```json
-{ “message”: “Feed the cat”}
+{ "message": "Buy apples and orange", "tag": "groceries" }
+{ "message": "Feed the cat"}
 ```
 
 - The tag field is optional
