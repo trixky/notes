@@ -34,7 +34,3 @@ go run main.go
 # build and start the server with a custom port using environment
 NOTE_PORT=4000 go run main.go
 ```
-
-## Dependencies
-
-This project is a simple vanilla golang api, without any dependency because "Scaling and performance are not a concern", so *less is more*.
